@@ -1,0 +1,17 @@
+import sys
+
+def Base_10_to_n(X, n):
+    X_dumy = X
+    out = ''
+    while X_dumy>0:
+        out = str(X_dumy%n)+out
+        X_dumy = int(X_dumy/n)
+    return out
+
+def main():
+  #input N
+  print('input N in the range 0<=N<=30')
+  N = sys.stdin.readline()
+
+if __name__ == "__main__":
+  main()
