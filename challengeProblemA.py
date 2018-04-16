@@ -1,4 +1,5 @@
 import sys
+from functools import reduce
 
 def NsinFrom10sin(X, n):
     if (int(X/n)):
@@ -10,10 +11,12 @@ def main():
   print('input N in the range 0<=N<=30')
   N = int(input())
   N = 4**N
-  list01 = range(1,N)
-  list01 = [ int(NsinFrom10sin(x,4)) for x in list01 ]
-  print(list01)
-  print(N)
+  #list01 = range(1,N)
+  list01 = [ list(str(NsinFrom10sin(x,4))) for x in range(1,N) ]
+  #print(list01)
+  list01 = reduce(lambda x, y: x + y, list01)
+  #print(list01)
+  print(list01.count('3'))
 
 if __name__ == "__main__":
   main()
