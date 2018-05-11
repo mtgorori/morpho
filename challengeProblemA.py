@@ -19,7 +19,6 @@ def main():
           tmp = tmp.count('3')
           cnt += tmp
       print(cnt)
-      print(sys.getsizeof(list01))
 
 if __name__ == "__main__":
   cProfile.run('main()', filename = 'main.prof')
