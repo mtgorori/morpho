@@ -1,16 +1,12 @@
-import sys
-import cProfile
-import pstats
-from memory_profiler import profile
 import numpy as np
 from numba import jit
 
-@profile
 @jit('i8(i8)')
 def cnt3(N):
     digits = '0123'
     cnt = 0
     tmp = 0
+    a = 0
     if N>30:
         pass
     else:
@@ -18,11 +14,11 @@ def cnt3(N):
         #change to xrange if python2x
         for i in range(1,N+1):
             num = i
-            res = []
             while num:
-                res.append(digits[num % 4])
+                a = num % 4
+                if a == 3:
+                    cnt += 1
                 num //= 4
-            cnt += ''.join(reversed(res or '0')).count('3')
     return cnt
 
 if __name__ == "__main__":
