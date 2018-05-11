@@ -3,7 +3,7 @@ import cProfile
 import pstats
 from memory_profiler import profile
 import numpy as np
-from numba import jit
+from numba import jit, i8
 
 @profile
 @jit('i8(i8)')
@@ -22,7 +22,7 @@ def cnt3(N):
             while num:
                 res.append(digits[num % 4])
                 num //= 4
-            cnt += ''.join(reversed(res or '0')).count('3')
+            cnt += ''.join(reversed(res)).count('3')
     return cnt
 
 if __name__ == "__main__":
