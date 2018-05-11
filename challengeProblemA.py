@@ -1,22 +1,23 @@
-import numba
-import numpy as np
+import sys
 
-@numba.jit
+def Base_10_to_n(X, n):
+    X_dumy = X
+    out = ''
+    while X_dumy>0:
+        out = str(X_dumy%n)+out
+        X_dumy = int(X_dumy/n)
+    return out
+
 def main():
-  cnt = 0
-  tmp = 0
-  N = int(input())
-  if N>30:
-      pass
-  else:
-      N = 4**N
-      list01 = []
-      for x in range(1,N+1):
-          list01.append(np.base_repr(x,4))
-      for i in list01:
-          tmp = i.count('3')
-          cnt += tmp
-      print(cnt)
+  #input N
+  print('input N in the range 0<=N<=30')
+  N = sys.stdin.readline()
+  list = [i for i in range(N)]
+  # for文で全要素を表示
+  for i in range(len(list)):  # lenでリストの要素数を求める, rangeにループ回数(回数分の要素のリストが戻り値), inはリストをとる
+    print '%d, ' % (list[i]), # print文の末尾に「,」を付けると改行しない
+    print '\n'
+
 
 if __name__ == "__main__":
-    main()
+  main()
