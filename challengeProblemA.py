@@ -3,8 +3,10 @@ import cProfile
 import pstats
 from memory_profiler import profile
 import numpy as np
+from numba import jit
 
 @profile
+@jit
 def main():
   cnt = 0
   #input N
@@ -14,6 +16,7 @@ def main():
       pass
   else:
       N = 4**N
+      #change to xrange if python2x
       for i in range(1,N+1):
           tmp = np.base_repr(i,4)
           tmp = tmp.count('3')
