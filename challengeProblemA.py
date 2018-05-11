@@ -1,23 +1,36 @@
-import sys
+import numba
 
-def Base_10_to_n(X, n):
-    X_dumy = X
-    out = ''
-    while X_dumy>0:
-        out = str(X_dumy%n)+out
-        X_dumy = int(X_dumy/n)
-    return out
+def memoize(f): #メモ化関数
+    table = {}
+    def func(*args):
+        if not args in table:
+            table[args] = f(*args)
+        return table[args]
+    return func
 
-def main():
-  #input N
-  print('input N in the range 0<=N<=30')
-  N = sys.stdin.readline()
-  list = [i for i in range(N)]
-  # for文で全要素を表示
-  for i in range(len(list)):  # lenでリストの要素数を求める, rangeにループ回数(回数分の要素のリストが戻り値), inはリストをとる
-    print '%d, ' % (list[i]), # print文の末尾に「,」を付けると改行しない
-    print '\n'
+@memoize
+def FoursinFrom10sin(X):
+    if (int(X/4)):
+        return FoursinFrom10sin(int(X/4))+ str(X%4)
+    return str(X%4)
 
+@numba.jit
+def count():
+  cnt = 0
+  tmp = 0
+  N = int(input())
+  if N>30:
+      pass
+  else:
+      N = 4**N
+      list01 = []
+      for x in range(1,N+1):
+          list01.append(FoursinFrom10sin(x))
+      for i in list01:
+          tmp = i.count('3')
+          cnt += tmp
+      print(cnt)
 
 if __name__ == "__main__":
-  main()
+    count()
+>>>>>>> parent of 054b599... 基数変換関数を導入した
