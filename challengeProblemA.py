@@ -10,7 +10,7 @@ from numba import jit
 @profile
 @jit
 def cnt3():
-    digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    digits = '0123'
     cnt = 0
     tmp = 0
     tmp1 = 0
