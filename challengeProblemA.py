@@ -6,11 +6,14 @@ import numpy as np
 from numba import jit
 
 @profile
-@jit('i8(i8)')
-def cnt3(N):
+@jit
+def cnt3():
     digits = '0123'
     cnt = 0
     tmp = 0
+    #input N
+    #print('input N in the range 0<=N<=30')
+    N = int(input())
     if N>30:
         pass
     else:
@@ -23,9 +26,9 @@ def cnt3(N):
                 res.append(digits[num % 4])
                 num //= 4
             cnt += ''.join(reversed(res or '0')).count('3')
-    return cnt
+    print(cnt)
 
 if __name__ == "__main__":
-    N = int(input())
-    cnt = cnt3(N)
-    print(cnt)
+  cProfile.run('cnt3()', filename = 'main.prof')
+  sts = pstats.Stats('main.prof')
+  sts.strip_dirs().sort_stats('cumulative').print_stats()
